@@ -1,0 +1,38 @@
+package regras;
+
+import br.com.alexandre.domain.Resultado;
+import br.com.alexandre.domain.Investimento;
+import br.com.alexandre.domain.Modalidade;
+
+rule "InvestimentoMenorDoQueMilReais"  
+salience 100
+no-loop true
+dialect "java"
+when
+	investimento: Investimento (valor < 1000.0)
+	resultado: Resultado()
+then
+end
+
+rule "InvestimentoEntreMilReaisEcincoMilReais"
+salience 100 //Avaliado antes de InvestimentoMaiorDoQueCincoMilReais
+no-loop true
+dialect "java"
+when
+	investimento: Investimento (valor >= 1000.0)
+	resultado: Resultado()
+then
+	// Código Java
+	resultado.addModalidade(Modalidade.BASIC);
+end
+
+rule "InvestimentoMaiorDoQueCincoMilReais"
+salience 90
+no-loop true
+dialect "java"
+when
+	investimento: Investimento (valor > 5000.0)
+	resultado: Resultado()
+then
+	resultado.addModalidade(Modalidade.PRIME);
+end
