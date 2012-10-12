@@ -19,38 +19,38 @@ public class DroolsTest {
 
 	@Autowired
 	private BRMS brms;
-
+	
 	@Test
 	public void deveriaIndicarQueNaoEpossivelInvestirEmAcoes() {
 		final Investimento investimento = new Investimento(90D);
-		final Resultado resultado = new Resultado();
-
-		brms.execute(investimento, resultado);
-
-		assertEquals(0, resultado.getModalidades().size());
+    	final Resultado resultado = new Resultado();
+    	
+    	brms.execute(investimento, resultado);
+    	  
+    	assertEquals(0, resultado.getModalidades().size());
 	}
 
 	@Test
 	public void deveriaIndicarQueEpossivelInvestirEmAcoesNaModalidadeBasica() {
 		final Investimento investimento = new Investimento(1000D);
-		final Resultado resultado = new Resultado();
-
-		brms.execute(investimento, resultado);
-
-		assertEquals(1, resultado.getModalidades().size());
-		assertEquals(Modalidade.BASIC, resultado.getModalidades().get(0));
+    	final Resultado resultado = new Resultado();
+    	
+    	brms.execute(investimento, resultado);
+    	    	
+    	assertEquals(1, resultado.getModalidades().size());
+    	assertEquals(Modalidade.BASIC, resultado.getModalidades().get(0));
 	}
-
+	
 	@Test
 	public void deveriaIndicarQueEpossivelInvestirEmAcoesNaModalidadePrime() {
 		final Investimento investimento = new Investimento(5500D);
-		final Resultado resultado = new Resultado();
-
-		brms.execute(investimento, resultado);
-
-		assertEquals(2, resultado.getModalidades().size());
-		assertEquals(Modalidade.BASIC, resultado.getModalidades().get(0));
-		assertEquals(Modalidade.PRIME, resultado.getModalidades().get(1));	
+    	final Resultado resultado = new Resultado();
+    	
+    	brms.execute(investimento, resultado);
+    	    	
+    	assertEquals(2, resultado.getModalidades().size());
+    	assertEquals(Modalidade.BASIC, resultado.getModalidades().get(0));
+    	assertEquals(Modalidade.PRIME, resultado.getModalidades().get(1));	
 
 	}
 }
